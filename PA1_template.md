@@ -23,7 +23,8 @@ act$date <- as.character(act$date) %>% as.Date('%Y-%m-%d')
 ```
 
 ## What is mean total number of steps taken per day?  
-The mean and median of the total steps taken per day were calculated by firstly grouping the data by the column date, and the using the summarise function.
+The mean and median of the total steps taken per day were calculated by firstly grouping the data by
+the column date, and the using the summarise function.
 
 ```r
 act_gpdate <- group_by(act, date)
@@ -63,7 +64,9 @@ a+geom_col()+labs(y = 'total steps in each day')
 ![](PA1_template_files/figure-html/histstep-1.png)<!-- -->
 
 ## What is the average daily activity pattern?
-For averaging across all days,  the data were firstly grouped by the column interval. And then the function summarise was used to calculate the average steps taken across all days for that interval. ggplot2 package was applied to produce the figure:
+For averaging across all days,  the data were firstly grouped by the column interval. And then the
+function summarise was used to calculate the average steps taken across all days for that interval.
+ggplot2 package was applied to produce the figure:
 
 ```r
 act_gpint <- group_by(act, interval)
@@ -125,13 +128,17 @@ qplot(date, steps, data = imputed, geom = 'col', ylab = 'total steps in each day
 ```
 
 ![](PA1_template_files/figure-html/histimputed-1.png)<!-- -->
-It can be seen that some bars, without height, in the previous figure were erected because the missing values were filled by imputation.  However, for those days where the values were 0, which means no activity, imputation cannot change them.
+It can be seen that some bars, without height, in the previous figure were erected because the
+missing values were filled by imputation.  However, for those days where the values were 0, which
+means no activity, imputation cannot change them.
 
 ## Are there differences in activity patterns between weekdays and weekends?
-A new factor was created through using the function weekdays. This factor indicates whether a recorded day is a weekday or weekend:
+A new factor was created through using the function weekdays. This factor indicates whether a
+recorded day is a weekday or weekend:
 
 ```r
-weekd_e <- mutate(imputed, weekdays = (weekdays(act$date) == 'Saturatday'|weekdays(act$date) == 'Sunday' )%>%factor(labels = c('weekdays', 'weekend')))
+weekd_e <- mutate(imputed, weekdays = (weekdays(act$date) == 'Saturatday'|weekdays(act$date) ==
+                                             'Sunday' )%>%factor(labels = c('weekdays', 'weekend')))
 weekd_e
 ```
 
@@ -151,7 +158,9 @@ weekd_e
 ## 10 1.47   2012-10-01       45 weekdays
 ## # ... with 17,558 more rows
 ```
-A line graph was then created to exihibite the pattern difference between weekdays and weekend activity. The graph was built by firstly grouping the data by the newly created column weekdays, and then using the ggplot2 system:
+A line graph was then created to exihibite the pattern difference between weekdays and weekend
+activity. The graph was built by firstly grouping the data by the newly created column weekdays, and
+then using the ggplot2 system:
 
 ```r
 weekde_gp <- group_by(weekd_e, weekdays, interval)
@@ -162,4 +171,7 @@ b+geom_area()+labs(y = 'average steps taken')+facet_grid(weekdays~.)
 
 ![](PA1_template_files/figure-html/patthern-1.png)<!-- -->
 
-It can be seen that there is a high peak at around 800 interval in the weekdays plot, after that time in a day, the activitly level was kept below at 100 steps. In comparison, the activity level in weekwends was more dispersed throughout the day, because no significant peak can be seen and activity level was generously higher.
+It can be seen that there is a high peak at around 800 interval in the weekdays plot, after that
+time in a day, the activitly level was kept below at 100 steps. In comparison, the activity level in
+weekwends was more dispersed throughout the day, because no significant peak can be seen and
+activity level was generously higher.

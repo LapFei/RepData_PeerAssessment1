@@ -443,7 +443,8 @@ sumim &lt;- summarise(im_gpd, mean = mean(steps), median = median(steps))</code>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <p>A new factor was created through using the function weekdays. This factor indicates whether a recorded day is a weekday or weekend:</p>
-<pre class="r"><code>weekd_e &lt;- mutate(imputed, weekdays = (weekdays(act$date) == &#39;Saturatday&#39;|weekdays(act$date) == &#39;Sunday&#39; )%&gt;%factor(labels = c(&#39;weekdays&#39;, &#39;weekend&#39;)))
+<pre class="r"><code>weekd_e &lt;- mutate(imputed, weekdays = (weekdays(act$date) == &#39;Saturatday&#39;|weekdays(act$date) ==
+                                             &#39;Sunday&#39; )%&gt;%factor(labels = c(&#39;weekdays&#39;, &#39;weekend&#39;)))
 weekd_e</code></pre>
 <pre><code>## # A tibble: 17,568 x 4
 ##     steps date       interval weekdays
